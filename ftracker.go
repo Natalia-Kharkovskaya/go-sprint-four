@@ -82,9 +82,7 @@ const (
 // duration float64 — длительность тренировки в часах.
 func RunningSpentCalories(action int, weight, duration float64) float64 {
 	// ваш код здесь
-	AvgSpeedInKmH := math.Pow(meanSpeed(action, duration), 2)
-	RunCalories := (runningCaloriesMeanSpeedMultiplier * AvgSpeedInKmH * runningCaloriesMeanSpeedShift) * weight / mInKm *
-		duration * minInH
+	RunCalories := (runningCaloriesMeanSpeedMultiplier * meanSpeed(action, duration) * runningCaloriesMeanSpeedShift) * weight / mInKm * duration * minInH
 	return RunCalories
 }
 
@@ -105,8 +103,7 @@ const (
 func WalkingSpentCalories(action int, duration, weight, height float64) float64 {
 	AvgSpeedInMSec := math.Pow((meanSpeed(action, duration) * kmhInMsec), 2)
 	highInM := height / cmInM
-	WalkCalories := walkingCaloriesWeightMultiplier*weight + AvgSpeedInMSec/highInM*walkingSpeedHeightMultiplier*
-		weight*duration*minInH
+	WalkCalories := (walkingCaloriesWeightMultiplier*weight + AvgSpeedInMSec/highInM*walkingSpeedHeightMultiplier*weight) * duration * minInH
 	return WalkCalories
 }
 
