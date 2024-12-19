@@ -82,7 +82,7 @@ const (
 // duration float64 — длительность тренировки в часах.
 func RunningSpentCalories(action int, weight, duration float64) float64 {
 	// ваш код здесь
-	speedInKmH := math.Pow((meanSpeed(action, duration) / kmhInMsec), 2)
+	speedInKmH := math.Pow((meanSpeed(action, duration) * kmhInMsec), 2)
 	RunCalories := (runningCaloriesMeanSpeedMultiplier * speedInKmH * runningCaloriesMeanSpeedShift) * weight / mInKm *
 		duration * minInH
 	return RunCalories
@@ -105,7 +105,7 @@ const (
 // height float64 — рост пользователя.
 func WalkingSpentCalories(action int, duration, weight, height float64) float64 {
 	// ваш код здесь
-	speedInKmH := math.Pow((meanSpeed(action, duration) / kmhInMsec), 2)
+	speedInKmH := math.Pow((meanSpeed(action, duration) * kmhInMsec), 2)
 	highInCm := height / cmInM
 	WalkCalories := walkingCaloriesWeightMultiplier*weight + speedInKmH/highInCm*walkingSpeedHeightMultiplier*
 		weight*duration*minInH
